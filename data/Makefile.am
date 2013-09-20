@@ -51,5 +51,6 @@ clean-local:
 	rm -f *.el
 
 CLEANFILES =						\
+	appdata-rng-init.el				\
 	appdata-validate.1				\
 	manpage.*
