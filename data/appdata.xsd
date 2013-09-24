@@ -12,13 +12,17 @@
    PUBLIC "-//freedesktop.org//DTD AppData 1.0//EN"
    SYSTEM "http://people.freedesktop.org/~hughsient/appdata/appdata.xsd"
 -->
-<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<xsd:schema elementFormDefault="qualified"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:xml="http://www.w3.org/XML/1998/namespace">
+  <xsd:import namespace="http://www.w3.org/XML/1998/namespace"
+              schemaLocation="http://www.w3.org/2009/01/xml.xsd"/>
   <xsd:element name="application">
     <xsd:complexType mixed="true">
       <xsd:all>
         <xsd:element ref="id" minOccurs="1" maxOccurs="1"/>
         <xsd:element ref="licence" minOccurs="1" maxOccurs="1"/>
-        <xsd:element ref="name" minOccurs="0" maxOccurs="1"/>
+        <xsd:element ref="name" minOccurs="0" maxOccurs="unbounded"/>
         <xsd:element ref="summary" minOccurs="0" maxOccurs="1"/>
         <xsd:element ref="description" minOccurs="1" maxOccurs="1"/>
         <xsd:element ref="url" minOccurs="0" maxOccurs="1"/>
@@ -26,6 +30,10 @@
         <xsd:element ref="updatecontact" minOccurs="0" maxOccurs="1"/>
       </xsd:all>
     </xsd:complexType>
+    <xsd:unique name="unique_name_per_lang">
+      <xsd:selector xpath="name"/>
+      <xsd:field xpath="@xml:lang"/>
+    </xsd:unique>
   </xsd:element>
   <xsd:element name="id">
     <xsd:complexType>
@@ -47,7 +55,7 @@
     <xsd:complexType>
       <xsd:simpleContent>
         <xsd:extension base="xsd:string">
-          <xsd:attribute name="lang" type="xsd:string"/>
+          <xsd:attribute ref="xml:lang"/>
         </xsd:extension>
       </xsd:simpleContent>
     </xsd:complexType>
@@ -56,7 +64,7 @@
     <xsd:complexType>
       <xsd:simpleContent>
         <xsd:extension base="xsd:string">
-          <xsd:attribute name="lang" type="xsd:string"/>
+          <xsd:attribute ref="xml:lang"/>
         </xsd:extension>
       </xsd:simpleContent>
     </xsd:complexType>
@@ -73,7 +81,7 @@
     <xsd:complexType>
       <xsd:simpleContent>
         <xsd:extension base="xsd:string">
-          <xsd:attribute name="lang" type="xsd:string"/>
+          <xsd:attribute ref="xml:lang"/>
         </xsd:extension>
       </xsd:simpleContent>
     </xsd:complexType>
@@ -89,7 +97,7 @@
     <xsd:complexType>
       <xsd:simpleContent>
         <xsd:extension base="xsd:string">
-          <xsd:attribute name="lang" type="xsd:string"/>
+          <xsd:attribute ref="xml:lang"/>
         </xsd:extension>
       </xsd:simpleContent>
     </xsd:complexType>
@@ -105,7 +113,7 @@
     <xsd:complexType>
       <xsd:simpleContent>
         <xsd:extension base="xsd:string">
-          <xsd:attribute name="lang" type="xsd:string"/>
+          <xsd:attribute ref="xml:lang"/>
           <xsd:attribute name="type" type="xsd:string"/>
           <xsd:attribute name="height" type="xsd:string"/>
           <xsd:attribute name="width" type="xsd:string"/>
