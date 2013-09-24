@@ -23,7 +23,7 @@
         <xsd:element ref="id" minOccurs="1" maxOccurs="1"/>
         <xsd:element ref="licence" minOccurs="1" maxOccurs="1"/>
         <xsd:element ref="name" minOccurs="0" maxOccurs="unbounded"/>
-        <xsd:element ref="summary" minOccurs="0" maxOccurs="1"/>
+        <xsd:element ref="summary" minOccurs="0" maxOccurs="unbounded"/>
         <xsd:element ref="description" minOccurs="1" maxOccurs="1"/>
         <xsd:element ref="url" minOccurs="0" maxOccurs="1"/>
         <xsd:element ref="screenshots" minOccurs="0" maxOccurs="1"/>
@@ -32,6 +32,10 @@
     </xsd:complexType>
     <xsd:unique name="unique_name_per_lang">
       <xsd:selector xpath="name"/>
+      <xsd:field xpath="@xml:lang"/>
+    </xsd:unique>
+    <xsd:unique name="unique_summary_per_lang">
+      <xsd:selector xpath="summary"/>
       <xsd:field xpath="@xml:lang"/>
     </xsd:unique>
   </xsd:element>
