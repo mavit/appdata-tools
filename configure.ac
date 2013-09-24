@@ -41,6 +41,21 @@ AS_IF([test "$enable_man" != no], [
 ])
 AM_CONDITIONAL(ENABLE_MAN, test "$enable_man" != no)
 
+AC_ARG_ENABLE(schemas,
+              [AS_HELP_STRING([--enable-schemas],
+                              [generate schemas [default=auto]])],,
+              enable_schemas=maybe)
+AS_IF([test "$enable_schemas" != no], [
+  AC_PATH_PROG([TRANG], [trang])
+  AS_IF([test -z "$TRANG"], [
+    AS_IF([test "$enable_schemas" = yes], [
+      AC_MSG_ERROR([trang is required for --enable-schemas])
+    ])
+    enable_schemas=no
+  ])
+])
+AM_CONDITIONAL(ENABLE_SCHEMAS, test "$enable_schemas" != no)
+
 dnl ---------------------------------------------------------------------------
 dnl - Makefiles, etc.
 dnl ---------------------------------------------------------------------------
